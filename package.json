@@ -1,0 +1,26 @@
+{
+  "name": "injector-non-overengineered",
+  "version": "1.0.0",
+  "description": "Simple JavaScript injector for content on a already existing webpage",
+  "main": "injector.js",
+  "scripts": {
+    "build" :"node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pascha-404/injector-non-overengineered.git"
+  },
+  "keywords": [
+    "js",
+    "JavaScript",
+    "injector",
+    "dom",
+    "manipulation"
+  ],
+  "author": "Patrick Pavliuchik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pascha-404/injector-non-overengineered/issues"
+  },
+  "homepage": "https://github.com/Pascha-404/injector-non-overengineered#readme"
+}
