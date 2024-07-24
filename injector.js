@@ -21,3 +21,17 @@ const replaceTextContent = (selector, translations) => {
 		}
 	});
 };
+
+const replaceAttributes = (selector, attributes, translations) => {
+	document.querySelectorAll(selector).forEach(element => {
+		attributes.forEach(attr => {
+			const originalAttrValue = element.getAttribute(attr);
+			if (translations[originalAttrValue]) {
+				element.setAttribute(attr, translations[originalAttrValue].stripNormalize());
+			}
+		});
+	});
+};
+
+replaceTextContent('h3,p,button', translations);
+replaceAttributes('button', ['data-soldout', 'data-adding', 'data-added'], translations);
