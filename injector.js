@@ -53,6 +53,20 @@ const replaceDateTime = selector => {
 	});
 };
 
+const modifyCurrencyFormat = selector => {
+	document.querySelectorAll(selector).forEach(element => {
+		const originalText = element.innerHTML;
+		const formatedText = originalText.replace(
+			/(\d+)\.(\d{2})\s*(\D)/g,
+			(match, beforeDot, afterDot) => {
+				return `${beforeDot},${afterDot} €`;
+			}
+		);
+		element.innerHTML = formatedText;
+	});
+};
+
+modifyCurrencyFormat('#price-display');
 replaceDateTime('#current-date-time');
 replaceTextContent('h3,p,button', translations);
 replaceAttributes('button', ['data-soldout', 'data-adding', 'data-added'], translations);
