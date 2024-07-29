@@ -42,6 +42,18 @@ const createDateTime = () => {
 	return `${day}.${month}.${year}, ${hours}:${minutes}:${seconds}`;
 };
 
+ /* Function that creates a element and replaces a existing element with the new one
+ 	@newElement - element type, for example: 'p', 'div', 'h1' ...
+ 	@toReplace - the element that should be replaced, should be of type HTMLElement
+ 	@innerHtml - defines the innerHTML attribute of the new created element */
+const createAndReplace = (newElement, toReplace, innerHtml) => {
+	const element = document.createElement(newElement);
+	element.innerHTML = innerHtml;
+	toReplace.replaceWith(element);
+
+	return element;
+};
+
 // Replacement Functions
 
 const replaceTextContent = (selector, translations) => {
@@ -71,8 +83,6 @@ const replaceAttributes = (selector, attributes, translations) => {
 		});
 	});
 };
-
-
 
 const replaceDateTime = selector => {
 	document.querySelectorAll(selector).forEach(element => {
@@ -110,8 +120,31 @@ const replaceDynamicText = (targetArray, translations) => {
 	});
 };
 
-//Execute Functions
+/*  @inptSelector - Selector for linked input
+	@selector - Selector for text element that should be replaced */
+const replaceItemCountText = (inptSelector, selector) => {
+	const inpt = document.querySelector(inptSelector);
+	const maxItems = 5;
+	const textElement = document.querySelector(selector);
+	const newTextElement = createAndReplace(
+		'p',
+		textElement,
+		`Bitte wählen Sie zwischen 1 und 5 Produkten: Aktuelle Gesamtmenge ${
+			maxItems - inpt.value
+		} weitere Artikel`
+	);
 
+	inpt.addEventListener('change', () => {
+		newTextElement.innerHTML = `Bitte wählen Sie zwischen 1 und 5 Produkten: Aktuelle Gesamtmenge ${
+			maxItems - inpt.value
+		} weitere Artikel`;
+		modifyCurrencyFormat('#price-display');
+	});
+};
+
+// Execute Functions
+
+replaceItemCountText('input[name="quantity"]', '#available-items');
 replaceDynamicText(
 	[
 		{
